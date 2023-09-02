@@ -32,6 +32,21 @@ public final class Constants {
     public static final double kDriveOneMinusAlpha = 0.88235;
     public static final double kErrorBound = 0;
   }
+  public static class ArmConstants {
+    public static final int kRotatingArmID = 0;
+    public static final int kArmStow = 0;
+    public static final int kTalonTachID = 0;
+    public static final double kArmP = 0;
+    public static final double kArmI = 0;
+    public static final double kArmD = 0;
+    public static final double kArmF = 0;
+    public static final int kArmCruiseVelocity = 0;
+    public static final int kArmMotionAcceleration = 0;
+    public static final double kArmDeadband = 0.05;
+
+
+
+  }
 
   public static class ControllerConstants {
     public static final double kDeadband = 0.05;
