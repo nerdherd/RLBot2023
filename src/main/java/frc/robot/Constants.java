@@ -27,6 +27,17 @@ import frc.robot.util.preferences.PrefDouble;
  // COMMENT ROBOT IDS INSTEAD OF DELETING
 public final class Constants {
 
+  public static class IntakeConstants {
+    public static final int kIntakeCANID = 0;
+    public static final double kIntakeConePower = 0;
+    public static final double kIntakeCubePower = 0;
+    public static final double kOuttakeConePower = 0;
+    public static final double kOuttakeCubePower = 0;
+    public static final double kIntakeHoldCone = 0;
+    public static final double kIntakeHoldCube = 0;
+
+  }
+
   public static class DriveConstants {
     public static final double kDriveAlpha = 0.11765;
     public static final double kDriveOneMinusAlpha = 0.88235;
