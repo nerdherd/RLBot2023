@@ -17,10 +17,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import frc.robot.Constants.ControllerConstants;
+import frc.robot.Constants.IntakeConstants;
 import frc.robot.commands.PathPlannerAutos;
 import frc.robot.commands.SquareTest;
 import frc.robot.commands.SwerveJoystickCommand;
 import frc.robot.commands.SwerveJoystickCommand.DodgeDirection;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Reportable.LOG_LEVEL;
 import frc.robot.subsystems.imu.Gyro;
 import frc.robot.subsystems.imu.NavX;
@@ -42,6 +44,7 @@ public class RobotContainer {
   public Gyro imu = new NavX();
   // public Gyro imu = new Pigeon(60);
   public SwerveDrivetrain swerveDrive;
+  public Intake intake = new Intake();
 
   private final CommandPS4Controller driverController = new CommandPS4Controller(
       ControllerConstants.kDriverControllerPort);
@@ -65,7 +68,7 @@ public class RobotContainer {
     } catch (IllegalArgumentException e) {
       DriverStation.reportError("Illegal Swerve Drive Module Type", e.getStackTrace());
     }
-
+  
     initAutoChoosers();
 
     // Configure the trigger bindings
@@ -115,6 +118,16 @@ public class RobotContainer {
     // These button bindings are chosen for testing, and may be changed based on
     driverController.share().onTrue(Commands.runOnce(imu::zeroHeading));
     driverController.options().onTrue(Commands.runOnce(swerveDrive::resetEncoders));
+
+    operatorController.R1().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeConePower)))
+          .onFalse(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeHoldCone)));
+    operatorController.R2().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kOuttakeConePower)))
+          .onFalse(Commands.runOnce(()->intake.stopPower()));
+    operatorController.L1().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeCubePower)))
+          .onFalse(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeHoldCube)));
+    operatorController.L2().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kOuttakeCubePower)))
+          .onFalse(Commands.runOnce(()->intake.stopPower()));
+    
   }
 
   private void initAutoChoosers() {
