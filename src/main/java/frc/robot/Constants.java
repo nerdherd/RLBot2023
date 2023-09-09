@@ -36,16 +36,47 @@ public final class Constants {
     public static final int kRotatingArmID = 0;
     public static final int kArmStow = 0;
     public static final int kTalonTachID = 0;
-    public static final double kArmP = 0;
+    public static final PrefDouble kArmP = new PrefDouble("kArmP", 0);
     public static final double kArmI = 0;
-    public static final double kArmD = 0;
-    public static final double kArmF = 0;
+    public static final PrefDouble kArmD = new PrefDouble("kArmD", 0);;
+    public static final PrefDouble kArmF = new PrefDouble("kArmF", 0);;
     public static final int kArmCruiseVelocity = 0;
     public static final int kArmMotionAcceleration = 0;
     public static final double kArmDeadband = 0.05;
+    public static final double kTicksPerAngle = 1981;
+    public static final int kArmLowerLimit = 0;
+    public static final int kArmTalonTach = 0;
+    public static final int kArmScore = 0;
+    public static final int kArmScoreCubeMid = 0;
+    public static final int kArmScoreCubeHigh = 0;
+    public static final int kArmGroundPickup = 0;
+    public static final int kArmSubstation = 0;
+    public static final double kStowedFF = 0;
+    public static final double kExtendedFF = 0;
+    public static final double kDiffFF = kExtendedFF - kStowedFF;
+    public static final double kJoystickMultiplier = 1;
+    public static final double kArmManualTicksPer20ms = 500; 
+  }
 
-
-
+  public static class ElevatorConstants {
+    public static final int kElevatorID = 0;
+    public static final int kElevatorStow = 0;
+    public static final int kElevatorScoreMidCube = 0; 
+    public static final int kElevatorScoreMidCone = 0;
+    public static final int kElevatorScoreHighCube = 0;
+    public static final int kElevatorScoreHighCone = 0; 
+    public static final int kElevatorSubstation = 0; // Height for substation
+    public static final int kElevatorMotionAcceleration = 0;
+    public static final int kElevatorCruiseVelocity = 0;
+    public static final PrefDouble kElevatorP = new PrefDouble("kElevatorP", 0);
+    public static final double kElevatorI = 0;
+    public static final PrefDouble kElevatorD = new PrefDouble("kElevatorD", 0);;
+    public static final double kElevatorF = 0; //TODO: Delete maybe ask kyle
+    public static final double kArbitraryFF = 0.00;
+    public static final double kElevatorDeadband = 0.05;
+    public static final double kJoystickMultiplier = 1;
+    public static final double kTicksPerAngle = 0;
+    public static final int kHallEffectID = 2;
   }
 
   public static class ControllerConstants {
