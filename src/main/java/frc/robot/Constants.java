@@ -240,5 +240,30 @@ public final class Constants {
     public static final PIDConstants kPPRotationPIDConstants = new PIDConstants(kPP_ThetaP, kPP_ThetaI, kPP_ThetaD);
 
     public static final boolean kUseAllianceColor = true;
+
+  }
+
+  public static class WristConstants {
+    public static final int kLeftWristID = 0;
+    public static final int kRightWristID = 0;
+    public static final int kLeftEncoderID = 0;
+    public static final int kWristStow = 0;
+    
+    public static final int kWristLowerLimit = 0;
+    public static final int kWristUpperLimit = 0;
+
+    public static final double kWristP = 0;
+    public static final double kWristI = 0;
+    public static final double kWristD = 0;
+    public static final double kWristF = 0;
+    public static final double kLowPassAlpha = 0.11765;
+    public static final double kJoystickScale = 500;
+    public static final int kWristCruiseVelocity = 0;
+    public static final int kWristMotionAcceleration = 0;
+    public static final double kWristDeadband = 0.05;
+    public static final double kWristFF = 0;
+    public static final double kWristGearRatio = 27;
+    public static final double kFalconTicksPerAbsoluteTicks = kWristGearRatio * 2048/1024;
+    public static final double kDegreesPerTick = 360 / kWristGearRatio / 2048;
   }
 }
