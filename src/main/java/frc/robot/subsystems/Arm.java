@@ -41,7 +41,7 @@ public class Arm extends SubsystemBase implements Reportable {
         rotatingArm.setInverted(false);
         //test
         rotatingArm.config_kP(0, ArmConstants.kArmP.get());
-        rotatingArm.config_kI(0, ArmConstants.kArmI);
+        rotatingArm.config_kI(0, ArmConstants.kArmI.get());
         rotatingArm.config_kD(0, ArmConstants.kArmD.get());
         rotatingArm.config_kF(0, ArmConstants.kArmF.get());
 
@@ -85,7 +85,7 @@ public class Arm extends SubsystemBase implements Reportable {
     }
 
     public void moveArmMotionMagic() {
-        double ff = -(ArmConstants.kStowedFF + ArmConstants.kDiffFF * percentExtended.getAsDouble()) * Math.cos(getArmAngle());
+        double ff = -(ArmConstants.kStowedFF.get() + ArmConstants.kDiffFF.get() * percentExtended.getAsDouble()) * Math.cos(getArmAngle());
         rotatingArm.set(ControlMode.MotionMagic, targetTicks, DemandType.ArbitraryFeedForward, ff);
     }
 

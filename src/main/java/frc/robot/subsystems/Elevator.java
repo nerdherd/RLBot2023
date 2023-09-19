@@ -46,18 +46,18 @@ public class Elevator extends SubsystemBase implements Reportable{
     // SmartDashboard.putNumber("Elevator Accel", ElevatorConstants.kElevatorMotionAcceleration);
     // SmartDashboard.putNumber("Elevator Cruise Vel", ElevatorConstants.kElevatorCruiseVelocity);
     elevator.config_kP(0, ElevatorConstants.kElevatorP.get());
-    elevator.config_kI(0, ElevatorConstants.kElevatorI);
+    elevator.config_kI(0, ElevatorConstants.kElevatorI.get());
     elevator.config_kD(0, ElevatorConstants.kElevatorD.get());
-    elevator.config_kF(0, ElevatorConstants.kElevatorF);
+    elevator.config_kF(0, ElevatorConstants.kElevatorF.get());
     elevator.configMotionAcceleration(ElevatorConstants.kElevatorMotionAcceleration);
     elevator.configMotionCruiseVelocity(ElevatorConstants.kElevatorCruiseVelocity);
   }
 
   public void init() {
     elevator.config_kP(0, ElevatorConstants.kElevatorP.get());
-    elevator.config_kI(0, ElevatorConstants.kElevatorI);
+    elevator.config_kI(0, ElevatorConstants.kElevatorI.get());
     elevator.config_kD(0, ElevatorConstants.kElevatorD.get());
-    elevator.config_kF(0, ElevatorConstants.kElevatorF);
+    elevator.config_kF(0, ElevatorConstants.kElevatorF.get());
     elevator.configMotionAcceleration(ElevatorConstants.kElevatorMotionAcceleration);
     elevator.configMotionCruiseVelocity(ElevatorConstants.kElevatorCruiseVelocity);
   
@@ -70,7 +70,7 @@ public class Elevator extends SubsystemBase implements Reportable{
 
   public void moveElevatorJoystick(double currentJoystickOutput, double angle) {
     setBrakeMode();
-      if (currentJoystickOutput > ElevatorConstants.kElevatorDeadband) {
+      if (currentJoystickOutput > ElevatorConstants.kElevatorDeadband.get()) {
         // if (!hallEffect.get() || elevator.getSelectedSensorPosition() <= -239000 || elevator.getStatorCurrent() >= 45) {
         if (elevator.getSelectedSensorPosition() <= -239000 || elevator.getStatorCurrent() >= 45) {
         elevator.set(ControlMode.PercentOutput, 0);
@@ -81,7 +81,7 @@ public class Elevator extends SubsystemBase implements Reportable{
 
         // elevator.setNeutralMode(NeutralMode.Coast);
         //((currentJoystickOutput * ArmConstants.kJoystickMultiplier)));
-      } else if (currentJoystickOutput < -ElevatorConstants.kElevatorDeadband) {
+      } else if (currentJoystickOutput < -ElevatorConstants.kElevatorDeadband.get()) {
         if (elevator.getSelectedSensorPosition() >= ElevatorConstants.kElevatorStow - 20000 || elevator.getStatorCurrent() >= 45) {
           elevator.set(ControlMode.PercentOutput, 0);
         } else {
@@ -107,7 +107,7 @@ public class Elevator extends SubsystemBase implements Reportable{
     // elevator.config_kF(0, SmartDashboard.getNumber("Elevator kF", ElevatorConstants.kElevatorF));
     // elevator.configMotionAcceleration(SmartDashboard.getNumber("Elevator Accel", ElevatorConstants.kElevatorMotionAcceleration));
     // elevator.configMotionCruiseVelocity(SmartDashboard.getNumber("Elevator Cruise Vel", ElevatorConstants.kElevatorCruiseVelocity));
-    double ff = -ElevatorConstants.kArbitraryFF * Math.sin(armAngleSupplier.getAsDouble());
+    double ff = -ElevatorConstants.kArbitraryFF.get() * Math.sin(armAngleSupplier.getAsDouble());
 
     // if (!hallEffect.get())
     // {

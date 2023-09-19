@@ -119,13 +119,13 @@ public class RobotContainer {
     driverController.share().onTrue(Commands.runOnce(imu::zeroHeading));
     driverController.options().onTrue(Commands.runOnce(swerveDrive::resetEncoders));
 
-    operatorController.R1().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeConePower)))
-          .onFalse(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeHoldCone)));
-    operatorController.R2().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kOuttakeConePower)))
+    operatorController.R1().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeConePower.get())))
+          .onFalse(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeHoldCone.get())));
+    operatorController.R2().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kOuttakeConePower.get())))
           .onFalse(Commands.runOnce(()->intake.stopPower()));
-    operatorController.L1().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeCubePower)))
-          .onFalse(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeHoldCube)));
-    operatorController.L2().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kOuttakeCubePower)))
+    operatorController.L1().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeCubePower.get())))
+          .onFalse(Commands.runOnce(()->intake.setPower(IntakeConstants.kIntakeHoldCube.get())));
+    operatorController.L2().onTrue(Commands.runOnce(()->intake.setPower(IntakeConstants.kOuttakeCubePower.get())))
           .onFalse(Commands.runOnce(()->intake.stopPower()));
     
   }

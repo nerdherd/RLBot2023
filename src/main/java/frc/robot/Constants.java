@@ -85,8 +85,8 @@ public final class Constants {
     public static final PrefDouble kElevatorF = new PrefDouble("kElevatorF", 0); //TODO: Delete maybe ask kyle
     public static final PrefDouble kArbitraryFF = new PrefDouble("kArbitraryFF", 0.00);
     public static final PrefDouble kElevatorDeadband = new PrefDouble("kElevatorDeadband",0.05);
-    public static final PrefDouble kJoystickMultiplier = 1;
-    public static final PrefDouble kTicksPerAngle = 0;
+    public static final double kJoystickMultiplier = 1;
+    public static final double kTicksPerAngle = 0;
     public static final int kHallEffectID = 2;
   }
 
