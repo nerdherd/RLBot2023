@@ -29,12 +29,12 @@ public final class Constants {
 
   public static class IntakeConstants {
     public static final int kIntakeCANID = 0;
-    public static final double kIntakeConePower = 0;
-    public static final double kIntakeCubePower = 0;
-    public static final double kOuttakeConePower = 0;
-    public static final double kOuttakeCubePower = 0;
-    public static final double kIntakeHoldCone = 0;
-    public static final double kIntakeHoldCube = 0;
+    public static final PrefDouble kIntakeConePower = new PrefDouble("kIntakeConePower",0);
+    public static final PrefDouble kIntakeCubePower = new PrefDouble("kIntakeCubePower",0);
+    public static final PrefDouble kOuttakeConePower = new PrefDouble("kOuttakeConePower",0);
+    public static final PrefDouble kOuttakeCubePower = new PrefDouble("kOuttakeCubePower",0);
+    public static final PrefDouble kIntakeHoldCone = new PrefDouble("kIntakeHoldCone",0);
+    public static final PrefDouble kIntakeHoldCube = new PrefDouble("kIntakeHoldCube",0);
 
   }
 
@@ -48,7 +48,7 @@ public final class Constants {
     public static final int kArmStow = 0;
     public static final int kTalonTachID = 0;
     public static final PrefDouble kArmP = new PrefDouble("kArmP", 0);
-    public static final double kArmI = 0;
+    public static final PrefDouble kArmI = new PrefDouble("kArmI", 0);
     public static final PrefDouble kArmD = new PrefDouble("kArmD", 0);;
     public static final PrefDouble kArmF = new PrefDouble("kArmF", 0);;
     public static final int kArmCruiseVelocity = 0;
@@ -62,9 +62,9 @@ public final class Constants {
     public static final int kArmScoreCubeHigh = 0;
     public static final int kArmGroundPickup = 0;
     public static final int kArmSubstation = 0;
-    public static final double kStowedFF = 0;
-    public static final double kExtendedFF = 0;
-    public static final double kDiffFF = kExtendedFF - kStowedFF;
+    public static final PrefDouble kStowedFF = new PrefDouble("kStowedFF",0);
+    public static final PrefDouble kExtendedFF = new PrefDouble("kExtendedFF",0);
+    public static final PrefDouble kDiffFF = new PrefDouble("kDiffFF", kExtendedFF.get() - kStowedFF.get());
     public static final double kJoystickMultiplier = 1;
     public static final double kArmManualTicksPer20ms = 500; 
   }
@@ -80,13 +80,13 @@ public final class Constants {
     public static final int kElevatorMotionAcceleration = 0;
     public static final int kElevatorCruiseVelocity = 0;
     public static final PrefDouble kElevatorP = new PrefDouble("kElevatorP", 0);
-    public static final double kElevatorI = 0;
-    public static final PrefDouble kElevatorD = new PrefDouble("kElevatorD", 0);;
-    public static final double kElevatorF = 0; //TODO: Delete maybe ask kyle
-    public static final double kArbitraryFF = 0.00;
-    public static final double kElevatorDeadband = 0.05;
-    public static final double kJoystickMultiplier = 1;
-    public static final double kTicksPerAngle = 0;
+    public static final PrefDouble kElevatorI = new PrefDouble("kElevatorI", 0);
+    public static final PrefDouble kElevatorD = new PrefDouble("kElevatorD", 0);
+    public static final PrefDouble kElevatorF = new PrefDouble("kElevatorF", 0); //TODO: Delete maybe ask kyle
+    public static final PrefDouble kArbitraryFF = new PrefDouble("kArbitraryFF", 0.00);
+    public static final PrefDouble kElevatorDeadband = new PrefDouble("kElevatorDeadband",0.05);
+    public static final PrefDouble kJoystickMultiplier = 1;
+    public static final PrefDouble kTicksPerAngle = 0;
     public static final int kHallEffectID = 2;
   }
 
