@@ -21,7 +21,7 @@ import frc.robot.util.NerdyMath;
 public class Wrist extends SubsystemBase implements Reportable {
     private TalonFX leftWrist;
     private TalonFX rightWrist;
-    private int targetTicks = WristConstants.kWristStow;
+    private int targetTicks = WristConstants.kWristStow.get();
     public BooleanSupplier atTargetPosition;
     private TalonSRX leftEncoder;
     private ExponentialSmoothingFilter joystickFilter = new ExponentialSmoothingFilter(WristConstants.kLowPassAlpha);
@@ -43,13 +43,13 @@ public class Wrist extends SubsystemBase implements Reportable {
         leftEncoder.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, 1000);
         leftEncoder.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.PulseWidthEncodedPosition, 1, 1000);
         //test
-        leftWrist.config_kP(0, WristConstants.kWristP);
-        leftWrist.config_kI(0, WristConstants.kWristI);
-        leftWrist.config_kD(0, WristConstants.kWristD);
-        leftWrist.config_kF(0, WristConstants.kWristF);
+        leftWrist.config_kP(0, WristConstants.kWristP.get());
+        leftWrist.config_kI(0, WristConstants.kWristI.get());
+        leftWrist.config_kD(0, WristConstants.kWristD.get());
+        leftWrist.config_kF(0, WristConstants.kWristF.get());
 
-        leftWrist.configMotionCruiseVelocity(WristConstants.kWristCruiseVelocity);
-        leftWrist.configMotionAcceleration(WristConstants.kWristMotionAcceleration);
+        leftWrist.configMotionCruiseVelocity(WristConstants.kWristCruiseVelocity.get());
+        leftWrist.configMotionAcceleration(WristConstants.kWristMotionAcceleration.get());
 
     }
 
@@ -90,7 +90,7 @@ public class Wrist extends SubsystemBase implements Reportable {
             tickChange = (int) joystickFilter.calculate(tickChange);
 
             targetTicks = currentTicks + tickChange;
-            targetTicks = (int) NerdyMath.clamp(targetTicks, WristConstants.kWristLowerLimit, WristConstants.kWristUpperLimit);
+            targetTicks = (int) NerdyMath.clamp(targetTicks, WristConstants.kWristLowerLimit.get(), WristConstants.kWristUpperLimit.get());
         }
         else {
             joystickFilter.calculate(0);
@@ -125,13 +125,13 @@ public class Wrist extends SubsystemBase implements Reportable {
     }
 
     public void moveWristMotionMagic() {
-        double ff = WristConstants.kWristFF * Math.cos(getTrueWristAngleRadians());
+        double ff = WristConstants.kWristFF.get() * Math.cos(getTrueWristAngleRadians());
         leftWrist.set(ControlMode.MotionMagic, targetTicks, DemandType.ArbitraryFeedForward, ff);
     }
 
     public void moveWristMotionMagicButton(int position) {
-        leftWrist.configMotionCruiseVelocity(WristConstants.kWristCruiseVelocity);
-        leftWrist.configMotionAcceleration(WristConstants.kWristMotionAcceleration);
+        leftWrist.configMotionCruiseVelocity(WristConstants.kWristCruiseVelocity.get());
+        leftWrist.configMotionAcceleration(WristConstants.kWristMotionAcceleration.get());
         setTargetTicks(position);
     }
 
