@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.VisionConstants;
 import frc.robot.commands.PathPlannerAutos;
 import frc.robot.commands.SquareTest;
 import frc.robot.commands.SwerveJoystickCommand;
@@ -29,6 +30,7 @@ import frc.robot.subsystems.imu.NavX;
 import frc.robot.subsystems.swerve.SwerveDrivetrain;
 import frc.robot.subsystems.swerve.SwerveDrivetrain.DRIVE_MODE;
 import frc.robot.subsystems.swerve.SwerveDrivetrain.SwerveModuleType;
+import frc.robot.subsystems.vision.primalWallnut.PrimalSunflower;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -59,12 +61,14 @@ public class RobotContainer {
 
   private SendableChooser<Supplier<CommandBase>> autoChooser = new SendableChooser<Supplier<CommandBase>>();
 
+  private PrimalSunflower sunflower = new PrimalSunflower(VisionConstants.kLimelightName, swerveDrive);
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     try {
-      swerveDrive = new SwerveDrivetrain(imu, SwerveModuleType.CANCODER);
+      swerveDrive = new SwerveDrivetrain(imu, SwerveModuleType.CANCODER, sunflower);
     } catch (IllegalArgumentException e) {
       DriverStation.reportError("Illegal Swerve Drive Module Type", e.getStackTrace());
     }
