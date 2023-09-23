@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.WristConstants;
-import frc.robot.filters.ExponentialSmoothingFilter;
+import frc.robot.util.filters.ExponentialSmoothingFilter;
 import frc.robot.util.NerdyMath;
 
 public class Wrist extends SubsystemBase implements Reportable {

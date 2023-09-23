@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants.ArmConstants;
-import frc.robot.filters.ExponentialSmoothingFilter;
+import frc.robot.util.filters.ExponentialSmoothingFilter;
 import frc.robot.util.NerdyMath;
 
 
@@ -94,7 +94,7 @@ public class Arm extends SubsystemBase implements Reportable {
             targetTicks += smoothingFilter.calculate(joystickInput) * ArmConstants.kArmManualTicksPer20ms;
             setTargetTicks(targetTicks);
         } else {
-            smoothingFilter.reset();
+            smoothingFilter.reset(0);
         }
     }
 

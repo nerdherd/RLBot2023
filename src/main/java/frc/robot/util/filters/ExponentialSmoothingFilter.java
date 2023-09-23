@@ -1,4 +1,4 @@
-package frc.robot.filters;
+package frc.robot.util.filters;
 
 /**
  * An exponential smoothing filter 
@@ -58,7 +58,7 @@ public class ExponentialSmoothingFilter implements Filter {
         return output;
     }
 
-    public void reset() {
-        lastInput = 0; 
+    public void reset(double start) {
+        this.lastInput = start;
     }
 }

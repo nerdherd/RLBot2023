@@ -67,7 +67,7 @@ public class SwerveDrivetrain extends SubsystemBase implements Reportable {
                     kFLDriveReversed,
                     kFLTurningReversed,
                     CANCoderConstants.kFLCANCoderID,
-                    CANCoderConstants.kFLOffsetDeg.get(),
+                    CANCoderConstants.kFLOffsetDeg,
                     CANCoderConstants.kFLCANCoderReversed);
                 frontRight = new CANSwerveModule(
                     kFRDriveID,
@@ -75,7 +75,7 @@ public class SwerveDrivetrain extends SubsystemBase implements Reportable {
                     kFRDriveReversed,
                     kFRTurningReversed,
                     CANCoderConstants.kFRCANCoderID,
-                    CANCoderConstants.kFROffsetDeg.get(),
+                    CANCoderConstants.kFROffsetDeg,
                     CANCoderConstants.kFRCANCoderReversed);
                 backLeft = new CANSwerveModule(
                     kBLDriveID,
@@ -83,7 +83,7 @@ public class SwerveDrivetrain extends SubsystemBase implements Reportable {
                     kBLDriveReversed,
                     kBLTurningReversed,
                     CANCoderConstants.kBLCANCoderID,
-                    CANCoderConstants.kBLOffsetDeg.get(),
+                    CANCoderConstants.kBLOffsetDeg,
                     CANCoderConstants.kBLCANCoderReversed);
                 backRight = new CANSwerveModule(
                     kBRDriveID,
@@ -91,7 +91,7 @@ public class SwerveDrivetrain extends SubsystemBase implements Reportable {
                     kBRDriveReversed,
                     kBRTurningReversed,
                     CANCoderConstants.kBRCANCoderID,
-                    CANCoderConstants.kBROffsetDeg.get(),
+                    CANCoderConstants.kBROffsetDeg,
                     CANCoderConstants.kBRCANCoderReversed);
                 break;
             default:
@@ -170,6 +170,11 @@ public class SwerveDrivetrain extends SubsystemBase implements Reportable {
         CANCoderConstants.kFROffsetDeg.set(frontRight.getTurnOffset() + frontRight.getTurningPosition());
         CANCoderConstants.kBLOffsetDeg.set(backLeft.getTurnOffset() + backLeft.getTurningPosition());
         CANCoderConstants.kBROffsetDeg.set(backRight.getTurnOffset() + backRight.getTurningPosition());
+        CANCoderConstants.kFLOffsetDeg.uploadPreferences();
+        CANCoderConstants.kFROffsetDeg.uploadPreferences();
+        CANCoderConstants.kBLOffsetDeg.uploadPreferences();
+        CANCoderConstants.kBROffsetDeg.uploadPreferences();
+
         
         resetEncoders();
     }
@@ -328,6 +333,15 @@ public class SwerveDrivetrain extends SubsystemBase implements Reportable {
             case ALL:
                 tab.add("Field Position", field).withSize(6, 3);
                 tab.add("Zero Modules", Commands.runOnce(this::zeroModules));
+                tab.addString(("Current Command"), () -> {
+                    Command currCommand = this.getCurrentCommand();
+                    if (currCommand == null) {
+                        return "null";
+                    } else {
+                        return currCommand.getName();
+                    }
+                }
+                );
                 // Might be negative because our swerveDriveKinematics is flipped across the Y axis
             case MEDIUM:
                 tab.addNumber("Encoder Resets", () -> this.numEncoderResets);
