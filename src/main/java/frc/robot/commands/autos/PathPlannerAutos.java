@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.autos;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,6 @@ import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.Constants.PathPlannerConstants;
 import frc.robot.subsystems.swerve.SwerveDrivetrain;
@@ -41,8 +40,8 @@ public class PathPlannerAutos {
     }
 
     public static void initPathGroup(String pathName) {
-        if (cachedPaths.containsKey(pathName)) {
-            DriverStation.reportWarning(String.format("Path '%s' has been loaded more than once.", pathName), true);
+        if (cachedPathGroups.containsKey(pathName)) {
+            DriverStation.reportWarning(String.format("Path group '%s' has been loaded more than once.", pathName), true);
         }
 
         List<PathPlannerTrajectory> path = PathPlanner.loadPathGroup(pathName, kPPPathConstraints);
@@ -80,15 +79,6 @@ public class PathPlannerAutos {
             swerveDrive::setChassisSpeeds, 
             events,
             swerveDrive);
-
-        
-        events.put("Wait3", 
-            Commands.waitSeconds(3)
-        );
-        
-        events.put("Print", 
-            new InstantCommand(() -> System.out.println("HELLO WORLD"))
-        ); 
     }
 
     /**

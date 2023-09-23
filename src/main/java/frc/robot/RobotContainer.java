@@ -19,10 +19,16 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.VisionConstants;
-import frc.robot.commands.PathPlannerAutos;
-import frc.robot.commands.SquareTest;
+import frc.robot.commands.autos.SquareTest;
 import frc.robot.commands.SwerveJoystickCommand;
 import frc.robot.commands.SwerveJoystickCommand.DodgeDirection;
+import frc.robot.commands.VisionAutos.ToNearestGridDebug;
+import frc.robot.commands.autos.Auto3PieceLong;
+import frc.robot.commands.autos.Auto3PieceShort;
+import frc.robot.commands.autos.Balance;
+import frc.robot.commands.autos.DirectBalance;
+import frc.robot.commands.autos.PathPlannerAutos;
+import frc.robot.commands.autos.SquareTest;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Reportable.LOG_LEVEL;
 import frc.robot.subsystems.imu.Gyro;
@@ -137,7 +143,8 @@ public class RobotContainer {
   private void initAutoChoosers() {
     // Remember to load the pathplanner paths here
     final String[] paths = {
-      "TestPath", "ChargeAroundLEFT", "TaxiRIGHT", "TaxiLEFT", "TestSquare", "Test Line", "TestSquare3"
+       "3Piece Short","3Piece Long","Balance","DirectBalance", "SquareTest"
+      // old paths "TestPath", "TestSquare", "Test Line", "TestSquare3"
     };
     
     PathPlannerAutos.init(swerveDrive);
@@ -148,14 +155,20 @@ public class RobotContainer {
     }
 
     autoChooser.addOption("Do Nothing", Commands::none);
-    autoChooser.addOption("Path Planner Test Auto", () -> PathPlannerAutos.pathplannerAuto("TestPath", swerveDrive));
-    autoChooser.addOption("Path Planner Charge Around LEFT", () -> PathPlannerAutos.pathplannerAuto("ChargeAroundLEFT", swerveDrive));
-    autoChooser.addOption("Path Planner TaxiRIGHT", () -> PathPlannerAutos.pathplannerAuto("TaxiRIGHT", swerveDrive));
-    autoChooser.addOption("Path Planner TaxiLEFT", () -> PathPlannerAutos.pathplannerAuto("TaxiLEFT", swerveDrive));
-    autoChooser.addOption("Path Planner TestSquare", () -> PathPlannerAutos.pathplannerAuto("TestSquare", swerveDrive));
-    autoChooser.addOption("Path Planner Test3", () -> PathPlannerAutos.pathplannerAuto("Test Line", swerveDrive));
-    autoChooser.addOption("Path Planner TestSquare3", () -> PathPlannerAutos.pathplannerAuto("TestSquare3", swerveDrive));
-    autoChooser.addOption("Path Planner TestSquare4", () -> new SquareTest(PathPlannerAutos.autoBuilder));
+    autoChooser.addOption("Path Planner Balance", () -> new Balance(PathPlannerAutos.autoBuilder, swerveDrive));
+    autoChooser.addOption("Path Planner 3PieceShort", () -> new Auto3PieceShort(PathPlannerAutos.autoBuilder,swerveDrive));
+    autoChooser.addOption("Path Planner 3PieceLong", () -> new Auto3PieceLong(PathPlannerAutos.autoBuilder, swerveDrive));
+    autoChooser.addOption("Path Planner DirectBalance", () -> new DirectBalance(PathPlannerAutos.autoBuilder, swerveDrive));
+    autoChooser.addOption("Path Planner SquareTest", () -> new SquareTest(PathPlannerAutos.autoBuilder));
+    // these are the auto paths in the old format (not the actual full auto command)
+    // autoChooser.addOption("Path Planner Test Auto", () -> PathPlannerAutos.pathplannerAuto("TestPath", swerveDrive));
+    // autoChooser.addOption("Path Planner TestSquare", () -> PathPlannerAutos.pathplannerAuto("TestSquare", swerveDrive));
+    // autoChooser.addOption("Path Planner Test3", () -> PathPlannerAutos.pathplannerAuto("Test Line", swerveDrive));
+    // autoChooser.addOption("Path Planner TestSquare3", () -> PathPlannerAutos.pathplannerAuto("TestSquare3", swerveDrive));
+    // autoChooser.addOption("Path Planner TestSquare4", () -> new SquareTest(PathPlannerAutos.autoBuilder));
+    // autoChooser.addOption("Path Planner 3Piece Short", () -> PathPlannerAutos.pathplannerAuto("3Piece Short", swerveDrive));
+    // autoChooser.addOption("Path Planner 3Piece Long", () -> PathPlannerAutos.pathplannerAuto("3Piece Long", swerveDrive));
+    // autoChooser.addOption("Path Planner DirectBalance", () -> PathPlannerAutos.pathplannerAuto("DirectBalance", swerveDrive));
 
     ShuffleboardTab autosTab = Shuffleboard.getTab("Autos");
 
