@@ -15,23 +15,8 @@ import frc.robot.subsystems.vision.jurrasicMarsh.LimelightHelpers;
 public class LimelightHelperUser extends SubsystemBase {
   String limelightName = "limelight";
 
-  /** Creates a new ExampleSubsystem. */
   public LimelightHelperUser(String limelightName) {
     this.limelightName = limelightName;
-  }
-
-  /**
-   * Example command factory method.
-   *
-   * @return a command
-   */
-  public CommandBase exampleMethodCommand() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-    return runOnce(
-        () -> {
-          /* one-time action goes here */
-        });
   }
 
   private Pose3d getRawPose3d() {
