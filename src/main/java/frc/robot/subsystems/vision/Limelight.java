@@ -533,6 +533,6 @@ public class Limelight implements Reportable{
           drive_cmd = MAX_DRIVE;
         }
         m_LimelightDriveCommand = drive_cmd;
-  }
+    }
 
   }
